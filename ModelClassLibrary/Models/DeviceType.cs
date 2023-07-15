@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ModelClassLibrary.Models
 {
-    internal class DeviceType
+    public enum DeviceType
     {
+        BarcodeScanner,
+        Printer,
+        Camera,
+        SocketTray
     }
 }

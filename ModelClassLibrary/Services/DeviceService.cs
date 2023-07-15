@@ -10,6 +10,17 @@ namespace ModelClassLibrary.Services
 {
     public class DeviceService : IDeviceService
     {
+        private List<Device> _devices = new List<Device>()
+        {
+            new Device
+            {
+                DeviceId = Guid.NewGuid(),
+                Name="First Barcode Scanner",
+                DeviceType=DeviceType.BarcodeScanner
+
+            },
+
+        };
         public List<Device> GetDevices()
         {
             throw new NotImplementedException();

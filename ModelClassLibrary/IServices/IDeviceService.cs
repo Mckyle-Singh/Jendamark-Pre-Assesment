@@ -9,6 +9,9 @@ namespace ModelClassLibrary.IServices
 {
     public interface IDeviceService
     {
-        List<Device> GetDevices();
+        List<Device> GetDevices(); 
+        List<Operation> GetOperations();    
+
+   
     }
 }

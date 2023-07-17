@@ -25,5 +25,7 @@ namespace ModelClassLibrary.IServices
         Operation GetSpecificOperation(Guid id);
 
         void DeleteOperation(Guid id);
+
+        void UpdateOperation(Operation operation);
     }
 }

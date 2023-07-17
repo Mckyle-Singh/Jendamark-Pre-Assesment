@@ -1,16 +1,18 @@
+using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using ModelClassLibrary.IServices;
 using ModelClassLibrary.Services;
-using Pre_Assesment.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+//builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<IDeviceService,DeviceService>();
+builder.Services.AddBlazoredModal();
 
 var app = builder.Build();
 

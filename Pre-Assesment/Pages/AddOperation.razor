@@ -5,7 +5,7 @@
 
 <h3>Add Operation</h3>
 
-<EditForm Model="operations">
+<EditForm Model="operations" OnSubmit="SubmitForm">
     <div class="form-group">
         <label>Operation Id</label>
         <input id="id" class="form-control" name="id" value="@operations.OperationId" readonly />
@@ -14,6 +14,12 @@
         <label>Name</label>
         <InputText id="name" class="form-control" name="name" @bind-Value="@operations.Name" />
     </div>
+
+    <div class="form-group">
+        <label>Order </label>
+        <InputNumber id="order" class="form-control" name="order" @bind-Value="@operations.OrderInWhichToPerform" />
+    </div>
+
     <div class="form-group">
         <label>Device Id</label>
         <input id="id" class="form-control" name="id" value="@operations.Device.DeviceId" readonly />
@@ -21,6 +27,9 @@
     <div class="form-group">
         <label>Device Name</label>
         <div>
+            <select>
+                
+            </select>
         </div>
     </div>
     <button class="btn btn-primary" type="submit">Save</button>
@@ -50,7 +59,12 @@
 
         device = DeviceService.GetSpecificDevice(Guid.Parse(DeviceID));
 
-       
+
+    }
+
+    private void SubmitForm()
+    {
+        DeviceService.UpdateOperation(operations);
     }
 
     

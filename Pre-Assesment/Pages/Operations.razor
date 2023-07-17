@@ -2,12 +2,12 @@
 @using ModelClassLibrary.IServices;
 @using ModelClassLibrary.Models;
 @inject IDeviceService DeviceService
+@inject IModalService model
 
 <div>
     <div style="float:left">
-        <a href="AddDevice/0">Add Device</a>
-        <button  class="btn btn-primary">Add Operation</button>
-        <button class="btn btn-success">Add Device</button>
+        <a href="AddDevice/0" class="btn btn-primary">Add Device </a>
+        <a  href="AddOperation/0" class="btn btn-primary">Add Operation</a>
     </div>
     <div style="float:right; width:40%;">
         <div class="col-sm-6" style="float:left">
@@ -76,11 +76,14 @@
     private List<Device> devices;
     private List<Operation> operations;
 
+    
+
     protected override void OnInitialized()
     {
 
         devices = DeviceService.GetDevices();
         operations = DeviceService.GetOperations();
+
     }
 
     private void OnDeleteDevice(Guid id)

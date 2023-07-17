@@ -81,5 +81,13 @@ namespace ModelClassLibrary.Services
             var device = GetSpecificOperation(id);
             _operations.Remove(device);
         }
+
+        public void UpdateOperation(Operation operation)
+        {
+            var GetOldOppeartion = GetSpecificOperation(operation.OperationId);
+            GetOldOppeartion.Name = operation.Name;
+            GetOldOppeartion.OrderInWhichToPerform = operation.OrderInWhichToPerform;
+            //GetOldDevice.DeviceType = device.DeviceType;
+        }
     }
 }

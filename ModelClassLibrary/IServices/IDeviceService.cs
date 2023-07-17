@@ -9,9 +9,21 @@ namespace ModelClassLibrary.IServices
 {
     public interface IDeviceService
     {
-        List<Device> GetDevices(); 
-        List<Operation> GetOperations();    
+        //Device Methods
+        List<Device> GetDevices();
+        Device GetSpecificDevice(Guid id);
 
-   
+        void UpdateDevice(Device device);
+
+        void AddNewDevice(Device device);
+
+        void DeleteDevice(Guid id);
+
+
+        //Operation Methods
+        List<Operation> GetOperations();   
+        Operation GetSpecificOperation(Guid id);
+
+        void DeleteOperation(Guid id);
     }
 }

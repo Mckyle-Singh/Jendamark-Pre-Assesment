@@ -1,0 +1,65 @@
+﻿@page "/AddDevice/{id}"
+@using ModelClassLibrary.IServices;
+@using ModelClassLibrary.Models;
+@inject IDeviceService DeviceService
+
+<h3>Add Device</h3>
+
+<EditForm Model="device" OnSubmit="@SubmitForm">
+    <div class="form-group">
+        <label>Device Id</label>
+        <input id="id" class="form-control" name="id" value="@device.DeviceId" readonly />
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <InputText id="name" class="form-control" name="name" @bind-Value="@device.Name" />
+    </div>
+    <div class="form-group">
+        <label>Device Type</label>
+        <div>
+            <InputSelect @bind-Value="device.DeviceType">
+                @foreach (var type in Enum.GetValues(typeof(DeviceType)))
+                {
+                    <option value="@type">@type</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</EditForm>
+
+<h5>this is the id: @Id</h5>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Device  device { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(Id)&& Id =="0" )
+        {
+            device = new Device();
+        }
+        else
+        {
+            device = DeviceService.GetSpecificDevice(Guid.Parse(Id));
+        }
+
+    }
+
+    private void SubmitForm()
+    {
+        if(device.DeviceId==Guid.Empty)
+        {
+            DeviceService.AddNewDevice(device);
+        }
+        else
+        {
+            DeviceService.UpdateDevice(device);
+        }
+       
+    }
+
+}

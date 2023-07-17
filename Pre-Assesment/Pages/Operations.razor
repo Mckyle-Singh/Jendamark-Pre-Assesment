@@ -3,6 +3,24 @@
 @using ModelClassLibrary.Models;
 @inject IDeviceService DeviceService
 
+<div>
+    <div style="float:left">
+        <a href="AddDevice/0">Add Device</a>
+        <button  class="btn btn-primary">Add Operation</button>
+        <button class="btn btn-success">Add Device</button>
+    </div>
+    <div style="float:right; width:40%;">
+        <div class="col-sm-6" style="float:left">
+            <input class="form-control" type="text" placeholder="Search"/>
+        </div>
+        <div>
+            <btn class="btn btn-default btn-info">filter</btn>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
 <h3>Devices</h3>
 
 <table class="table">
@@ -18,6 +36,8 @@
                 <td>@device.DeviceId</td>
                 <td>@device.Name</td>
                 <td>@device.DeviceType</td>
+                <td><a href="AddDevice/@device.DeviceId" class="btn btn-warning">edit</a></td>
+                <td> <button class="btn btn-danger" @onclick="@(e=> OnDeleteDevice(device.DeviceId))">Delete</button></td>
             </tr>
         }
     </tbody>
@@ -31,7 +51,6 @@
         <th>Operation Id</th>
         <th>Operation Name</th>
         <th>Order</th>
-        <th>Device Id</th>
         <th>Device Name</th>
         <th>Device Type</th>
     </tr>
@@ -42,24 +61,35 @@
                 <td>@opp.OperationId</td>
                 <td>@opp.Name</td>
                 <td>@opp.OrderInWhichToPerform</td>
-                <td>@opp.Device.DeviceId</td>
                 <td>@opp.Device.Name</td>
                 <td>@opp.Device.DeviceType</td>
-
+                <td><a href="AddOperation/@opp.OperationId/@opp.Device.DeviceId" class="btn btn-warning">edit</a> </td>
+                <td> <button class="btn btn-danger" @onclick="@(e=> OnDeleteOperation(opp.OperationId))">Delete</button></td>
             </tr>
         }
     </tbody>
 </table>
 <br />
 
-@code {
+@code 
+{
     private List<Device> devices;
     private List<Operation> operations;
 
     protected override void OnInitialized()
     {
-        devices = DeviceService.GetDevices();
 
+        devices = DeviceService.GetDevices();
         operations = DeviceService.GetOperations();
+    }
+
+    private void OnDeleteDevice(Guid id)
+    {
+        DeviceService.DeleteDevice(id);
+    }
+
+    private void OnDeleteOperation(Guid id)
+    {
+        DeviceService.DeleteOperation(id);
     }
 }

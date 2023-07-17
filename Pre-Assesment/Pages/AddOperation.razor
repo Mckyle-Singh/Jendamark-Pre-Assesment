@@ -1,0 +1,57 @@
+﻿@page "/AddOperation/{id}/{deviceId}"
+@using ModelClassLibrary.IServices;
+@using ModelClassLibrary.Models;
+@inject IDeviceService DeviceService
+
+<h3>Add Operation</h3>
+
+<EditForm Model="operations">
+    <div class="form-group">
+        <label>Operation Id</label>
+        <input id="id" class="form-control" name="id" value="@operations.OperationId" readonly />
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <InputText id="name" class="form-control" name="name" @bind-Value="@operations.Name" />
+    </div>
+    <div class="form-group">
+        <label>Device Id</label>
+        <input id="id" class="form-control" name="id" value="@operations.Device.DeviceId" readonly />
+    </div>
+    <div class="form-group">
+        <label>Device Name</label>
+        <div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</EditForm>
+
+<h5>this id: @Id</h5>
+
+<h5>this id: @DeviceID</h5>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public string DeviceID{ get; set; }
+
+    private Operation operations{ get; set; }
+
+    private Device device{ get; set; }
+
+    //private List<Device> devices { get; set; }
+
+    protected override void OnInitialized()
+    {
+        operations= DeviceService.GetSpecificOperation(Guid.Parse(Id));
+
+        device = DeviceService.GetSpecificDevice(Guid.Parse(DeviceID));
+
+       
+    }
+
+    
+}
